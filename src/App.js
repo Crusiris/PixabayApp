@@ -10,6 +10,10 @@ function App() {
 const [search, saveSearch] = useState('');
 //Estado para guardar el resultado de la peticion
 const [ images, saveImages ] = useState([]);
+//Estado para obtener y manejar la pagina actual
+const [ actualPage, saveActualPage ] = useState(1);
+//Estado para obtener y manejar el total de paginas
+const [ totalPage, saveTotalPage ] = useState(1);
 
 
 useEffect(()=>{
@@ -25,7 +29,11 @@ useEffect(()=>{
     const resp = await fetch(url);
     const result = await resp.json();
     saveImages(result.hits);
-  
+
+    //Calculando el total de paginas
+    const totalPages = Math.ceil(result.totalHits / imgPag );
+    saveTotalPage(totalPages);
+
   }
   getApi();
 },[search])
