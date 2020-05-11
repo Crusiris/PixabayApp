@@ -24,7 +24,7 @@ useEffect(()=>{
 
     const imgPag = 30;
     const key = '11469913-e19f74ca367a58d062c6eddf8';
-    const url = `https://pixabay.com/api/?key=${key}&q=${search}&per_page=${imgPag}`;
+    const url = `https://pixabay.com/api/?key=${key}&q=${search}&per_page=${imgPag}&page=${actualPage}`;
 
     const resp = await fetch(url);
     const result = await resp.json();
@@ -34,9 +34,29 @@ useEffect(()=>{
     const totalPages = Math.ceil(result.totalHits / imgPag );
     saveTotalPage(totalPages);
 
+    //Scroll hacia arriba
+    const jumbotron = document.querySelector('.jumbotron');
+    jumbotron.scrollIntoView({behavior:'smooth'});
+
   }
   getApi();
-},[search])
+},[search, actualPage]);
+
+
+//Definiendo la pagina anterior
+const pageBack = () =>{
+  const newActualPage = actualPage - 1;
+
+  if(newActualPage === 0 )return;
+  saveActualPage(newActualPage);
+}
+
+//Definiendo la pagina siguiente
+const pagNext = () =>{
+  const newActualPage = actualPage + 1;
+  if(newActualPage > totalPage) return;
+  saveActualPage(newActualPage);
+}
 
   return (
    
@@ -53,6 +73,25 @@ useEffect(()=>{
          <ListImages
          images={images}
          />
+
+        {(actualPage === 1)? null : 
+        (
+         <button
+         type="button"
+         className="bbtn btn-info mr-1"
+         onClick={pageBack}
+         >&laquo; Anterior </button>
+        )}
+
+         { (actualPage === totalPage)? null :
+           (
+            <button
+            type="button"
+            className="bbtn btn-info mr-1"
+            onClick={pagNext}
+            > Siguiente &raquo;</button>
+           ) }
+
       </div>
    </div>
   );
