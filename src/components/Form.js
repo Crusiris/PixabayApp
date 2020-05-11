@@ -3,7 +3,7 @@ import Error from './Error';
 
 
 
-const Form = () => {
+const Form = ({saveSearch}) => {
 
     //Estado para obtener y manejar los terminos.
 const [ finished, saveFinished ]= useState('');
@@ -21,7 +21,9 @@ const searchImage = e =>{
     saveError(true)
     return;
    }
-   saveError(false)
+   saveError(false);
+
+   saveSearch(finished);
 }
 
     return ( 

@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
 
 
 
+
 function App() {
+  //Estado para obtener y manejar el termino desde el componente formulario
+const [search, saveSearch] = useState('');
+
+useEffect(()=>{
+ 
+  const getApi = async ()=>{
+     //Validando que exista un campo
+    if(search === '') return;
+
+    const imgPag = 30;
+    const key = '11469913-e19f74ca367a58d062c6eddf8';
+    const url = `https://pixabay.com/api/?key=${key}&q=${search}&per_page=${imgPag}`;
+
+    const resp = await fetch(url);
+    const result = await resp.json();
+    console.log(result);
+  
+  }
+  getApi();
+},[search])
+
   return (
    
    <div className="container">
      <div className="jumbotron">
         <p className="lead text-center"> Buscardo de Imagenes</p>
-        <Form/>
+        <Form
+        saveSearch = {saveSearch}
+        />
 
      </div>
 
