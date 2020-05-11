@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
+import ListImages from './components/ListImages';
 
 
 
@@ -7,6 +8,9 @@ import Form from './components/Form';
 function App() {
   //Estado para obtener y manejar el termino desde el componente formulario
 const [search, saveSearch] = useState('');
+//Estado para guardar el resultado de la peticion
+const [ images, saveImages ] = useState([]);
+
 
 useEffect(()=>{
  
@@ -20,7 +24,7 @@ useEffect(()=>{
 
     const resp = await fetch(url);
     const result = await resp.json();
-    console.log(result);
+    saveImages(result.hits);
   
   }
   getApi();
@@ -37,6 +41,11 @@ useEffect(()=>{
 
      </div>
 
+      <div className="row justify-content-center" >
+         <ListImages
+         images={images}
+         />
+      </div>
    </div>
   );
 }
