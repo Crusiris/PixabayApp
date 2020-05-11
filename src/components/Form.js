@@ -1,7 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Error from './Error';
+
+
 
 const Form = () => {
+
+    //Estado para obtener y manejar los terminos.
+const [ finished, saveFinished ]= useState('');
+
+    //Estado para obtener y manejar los errores
+const [ error, saveError ]= useState(false);
+
+//Funcion que buscara las imagenes
+const searchImage = e =>{
+   e.preventDefault();
+   
+
+   //validando formulario
+   if( finished.trim() === ''){
+    saveError(true)
+    return;
+   }
+   saveError(false)
+}
+
     return ( 
+        <form
+        onSubmit={searchImage}
+        >
         <div className="row">
             <div className="form-group col-md-8">
                 <input 
@@ -9,6 +35,7 @@ const Form = () => {
                 
                 className="form-control form-control-lg"
                 placeholder="Busca una imagen, ejemplo: futbol o cafe"
+                onChange={e => saveFinished(e.target.value)}
                 />
             </div>
 
@@ -20,7 +47,8 @@ const Form = () => {
                 />
             </div>
         </div>
-
+        {error ? <Error message="El termino es obligatorio"/>: null}
+        </form>
      );
 }
  
