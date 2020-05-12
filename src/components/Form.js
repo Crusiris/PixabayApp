@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 
 
@@ -45,7 +46,7 @@ const searchImage = e =>{
                 <input 
                 type="submit"
                 className="btn btn-lg btn-danger btn-block"
-                value="search"
+                value="Search"
                 />
             </div>
         </div>
@@ -54,4 +55,8 @@ const searchImage = e =>{
      );
 }
  
+Form.propTypes = {
+    saveSearch: PropTypes.func.isRequired
+} 
+
 export default Form;

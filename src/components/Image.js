@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Image = ({image}) => {
     //Destructurin
@@ -28,4 +29,7 @@ const Image = ({image}) => {
     );
 }
  
+Image.propTypes = {
+    image: PropTypes.object.isRequired
+}
 export default Image;

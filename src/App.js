@@ -3,8 +3,6 @@ import Form from './components/Form';
 import ListImages from './components/ListImages';
 
 
-
-
 function App() {
   //Estado para obtener y manejar el termino desde el componente formulario
 const [search, saveSearch] = useState('');
@@ -61,7 +59,7 @@ const pagNext = () =>{
   return (
    
    <div className="container">
-     <div className="jumbotron">
+     <div className="jumbotron sinpadding">
         <p className="lead text-center"> Buscardo de Imagenes</p>
         <Form
         saveSearch = {saveSearch}
@@ -78,7 +76,7 @@ const pagNext = () =>{
         (
          <button
          type="button"
-         className="bbtn btn-info mr-1"
+         className="bbtn btn-info mr-1 btns"
          onClick={pageBack}
          >&laquo; Anterior </button>
         )}
@@ -87,7 +85,7 @@ const pagNext = () =>{
            (
             <button
             type="button"
-            className="bbtn btn-info mr-1"
+            className="bbtn btn-info mr-1 btns"
             onClick={pagNext}
             > Siguiente &raquo;</button>
            ) }
